@@ -11,30 +11,54 @@ from OpenSSL import crypto
 from quick_csr import __version__
 
 
+DEFAULT_CONFIG_LOCATION = '~/.quick-csr.cfg'
+DEFAULT_PROFILE = 'default'
+DEFAULT_SETTINGS = {}
+
+
 logger = logging.getLogger(__name__)
 
 
 def parse_args(argv: List[str] = sys.argv[1:]) -> Namespace:
     parser = ArgumentParser(
         'Generates certificate signing requests (PKCS #10/PEM) with subject '
-        'information that are defined in a configuration file.')
-    config_default = '~/.quick-csr.cfg'
-    # TODO allow specifiying a section with deviant values
+        'information that are defined in a configuration file.',
+        epilog='Due to a bug in the optparse module, the meta variable for '
+               'the --config option cannot yet be rendered as '
+               '[PATH[:PROFILE]] above. Meaning, the declaration of a profile '
+               'is optional and must be preceeded by a ":".')
     parser.add_argument(
-        '-c', '--config', default=config_default,
-        help='Configuration file location (default: {})'.format(config_default)
+        '-c', '--config', default=DEFAULT_CONFIG_LOCATION,
+        # metavar='[PATH[:PROFILE]]',
+        # bug refs: https://bugs.python.org/issue11874,
+        #           https://github.com/python/cpython/pull/1826
+        help='Configuration file location (default: {}) and profile (default: '
+             '{}) separated by a colon.'.format(DEFAULT_CONFIG_LOCATION,
+                                                DEFAULT_PROFILE)
     )
     parser.add_argument(
         '--version', action="version", version='quick-csr ' + __version__,
         help='Print version and exit.')
     parser.add_argument('commonName')
     parser.add_argument('alternativeName', nargs="*")
-    return parser.parse_args(argv)
+
+    args = parser.parse_args(argv)
+
+    if ':' in args.config:
+        args.config_location, args.config_profile = args.config.split(':', 1)
+        if not args.config_location:
+            args.config_location = DEFAULT_CONFIG_LOCATION
+    else:
+        args.config_location, args.config_profile = args.config, None
+    delattr(args, 'config')
+
+    return args
 
 
-def parse_config(location: str) -> ConfigParser:
-    location = path.expanduser(location)
-    parser = ConfigParser(default_section='default')
+def parse_config(args: Namespace) -> ConfigParser:
+    # for the record: the configparser module is a time swallowing pita
+    location = path.expanduser(args.config_location)
+    parser = ConfigParser(defaults=DEFAULT_SETTINGS, default_section='default')
     parser.optionxform = str  # meh
     parser.read(location)
     return parser
@@ -42,6 +66,8 @@ def parse_config(location: str) -> ConfigParser:
 
 def generate_plan(args: Namespace, parser: ConfigParser) -> Dict[str, str]:
     result = parser.defaults()
+    if args.config_profile is not None:
+        result.update(parser[args.config_profile])
     result['commonName'] = args.commonName
     result['alternativeNames'] = args.alternativeName
     return result
@@ -100,7 +126,7 @@ def process(plan: Dict[str, str]) -> None:
 def main() -> None:
     try:
         args = parse_args()
-        parser = parse_config(args.config)
+        parser = parse_config(args)
         plan = generate_plan(args, parser)
         process(plan)
         raise SystemExit(0)
