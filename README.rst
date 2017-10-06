@@ -100,6 +100,25 @@ Now, with another profile for another OU (``laboratory``):
     quick-csr -c :laboratory living-concrete.cubs.org.il
 
 
+Required options
+----------------
+
+These options must be present at least in the ``defaults`` section:
+
+- ``organizationalUnitName``
+- ``organizationName``
+- ``localityName``
+- ``stateOrProvinceName``
+- ``countryName``
+
+
+Optional options
+----------------
+
+- ``keysize`` (default: ``4096``)
+   - length of the generated key in bits
+
+
 .. _CSR: https://en.wikipedia.org/wiki/Certificate_Signing_Request
 .. _pipsi: https://pypi.python.org/pypi/pipsi
 .. _`PKCS #10`: https://tools.ietf.org/html/rfc2986

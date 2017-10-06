@@ -13,7 +13,7 @@ from quick_csr import __version__
 
 DEFAULT_CONFIG_LOCATION = '~/.quick-csr.cfg'
 DEFAULT_PROFILE = 'default'
-DEFAULT_SETTINGS = {}
+DEFAULT_SETTINGS = {'keysize': 4096}
 
 
 logger = logging.getLogger(__name__)
@@ -58,14 +58,15 @@ def parse_args(argv: List[str] = sys.argv[1:]) -> Namespace:
 def parse_config(args: Namespace) -> ConfigParser:
     # for the record: the configparser module is a time swallowing pita
     location = path.expanduser(args.config_location)
-    parser = ConfigParser(defaults=DEFAULT_SETTINGS, default_section='default')
+    parser = ConfigParser(default_section='default')
     parser.optionxform = str  # meh
     parser.read(location)
     return parser
 
 
 def generate_plan(args: Namespace, parser: ConfigParser) -> Dict[str, str]:
-    result = parser.defaults()
+    result = DEFAULT_SETTINGS.copy()
+    result.update(parser.defaults())
     if args.config_profile is not None:
         result.update(parser[args.config_profile])
     result['commonName'] = args.commonName
@@ -91,10 +92,10 @@ def generate_request(plan: Dict[str, str]) -> crypto.X509Req:
     return request
 
 
-def generate_key() -> crypto.PKey:
+def generate_key(size) -> crypto.PKey:
     # TODO make length configurable
     result = crypto.PKey()
-    result.generate_key(crypto.TYPE_RSA, 4096)
+    result.generate_key(crypto.TYPE_RSA, int(size))
     return result
 
 
@@ -106,11 +107,11 @@ def process(plan: Dict[str, str]) -> None:
             value = './.'
         if isinstance(value, Sequence) and not isinstance(value, str):
             value = ', '.join(value)
-        print('{:<24}: {}'.format(key, value))
+        print('{:<23}:  {}'.format(key, value))
     print()
 
     request = generate_request(plan)
-    key_pair = generate_key()
+    key_pair = generate_key(plan['keysize'])
     request.set_pubkey(key_pair)
     request.sign(key_pair, 'sha512')
 
