@@ -115,8 +115,10 @@ These options must be present at least in the ``defaults`` section:
 Optional options
 ----------------
 
-- ``keysize`` (default: ``4096``)
+- ``key_size`` (default: ``4096``)
    - length of the generated key in bits
+- ``target_folder`` (defaults to the current working directory)
+  - the resulting files are written there
 
 
 .. _CSR: https://en.wikipedia.org/wiki/Certificate_Signing_Request

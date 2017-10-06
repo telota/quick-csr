@@ -13,7 +13,8 @@ from quick_csr import __version__
 
 DEFAULT_CONFIG_LOCATION = '~/.quick-csr.cfg'
 DEFAULT_PROFILE = 'default'
-DEFAULT_SETTINGS = {'keysize': 4096}
+DEFAULT_SETTINGS = {'key_size': 4096,
+                    'target_folder': getcwd()}
 
 
 logger = logging.getLogger(__name__)
@@ -111,11 +112,12 @@ def process(plan: Dict[str, str]) -> None:
     print()
 
     request = generate_request(plan)
-    key_pair = generate_key(plan['keysize'])
+    key_pair = generate_key(plan['key_size'])
     request.set_pubkey(key_pair)
     request.sign(key_pair, 'sha512')
 
-    common_path = path.join(getcwd(), plan['commonName'])
+    target_folder = path.expanduser(plan['target_folder'])
+    common_path = path.join(target_folder, plan['commonName'])
     with open(common_path + '.csr.pem', 'wb') as f:
         print('Writing {}'.format(f.name))
         f.write(crypto.dump_certificate_request(crypto.FILETYPE_PEM, request))
