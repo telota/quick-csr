@@ -9,6 +9,7 @@ supported.
 Installation
 ------------
 
+Python 3.5 or later is required to install and run the tool.
 There's currently no package published on the Python Package Index, therefore
 you have to obtain the source code, change into its root directory and run:
 
@@ -16,9 +17,9 @@ you have to obtain the source code, change into its root directory and run:
 
     $ pip install --user .
 
-To avoid conflicts within your ``site-package``'s namespace, it is however
-recommended to install any end-user-software in a separate virtual environment
-with pipsi_:
+To avoid conflicts within a system's ``site-package``'s namespace, it is
+however recommended to install any end-user-software in a separate virtual
+environment with pipsi_:
 
 .. code-block:: console
 
@@ -36,14 +37,14 @@ What it does
 ------------
 
 The tool takes at least one distinguished name as argument, creates a CSR
-according to the `PKCS #10`_ specs for it, creates a key pair to
-sign it and saves both to disk (the CSR in the ``PEM`` format). The CSR is to
-be handled by a Certificate Authority, the keys are later used to unlock the
-delivered certificate chain, e.g. on a web server.
+according to the `PKCS #10`_ specs for it, creates a key pair to sign it and
+saves both to disk (the CSR in the ``PEM`` format). The CSR is to be handled by
+a Certificate Authority, the keys are later used to unlock the delivered
+certificate chain, e.g. on a web server.
 
 .. important::
 
-    The keys are not secured with a password, keep these in a safe location!
+    The keys are not secured with a password, so keep them in a safe location!
     Or add a password with ``openssl``.
 
 

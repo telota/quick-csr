@@ -27,7 +27,7 @@ def parse_args(argv: List[str] = sys.argv[1:]) -> Namespace:
         epilog='Due to a bug in the optparse module, the meta variable for '
                'the --config option cannot yet be rendered as '
                '[PATH[:PROFILE]] above. Meaning, the declaration of a profile '
-               'is optional and must be preceeded by a ":".')
+               'is optional and must be preceded by a ":".')
     parser.add_argument(
         '-c', '--config', default=DEFAULT_CONFIG_LOCATION,
         # metavar='[PATH[:PROFILE]]',
@@ -94,7 +94,6 @@ def generate_request(plan: Dict[str, str]) -> crypto.X509Req:
 
 
 def generate_key(size) -> crypto.PKey:
-    # TODO make length configurable
     result = crypto.PKey()
     result.generate_key(crypto.TYPE_RSA, int(size))
     return result
