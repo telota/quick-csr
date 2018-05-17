@@ -24,6 +24,12 @@ environment with pipsi_:
 .. code-block:: console
 
     $ pipsi install .
+    
+Alternatively, good experiences had been made by using pyenv-virtualenv to set up a Python 3.5.2 environment in the local quick-csr-folder. Then you can skip possible pipsi problems.
+ 
+ .. code-block:: console
+ 
+    $ pyenv local quickcsr
 
 Finally, to install a hackable instance of the software (assuming you created
 a virtual environment):
