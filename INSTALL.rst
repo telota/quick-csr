@@ -32,3 +32,5 @@ a virtual environment):
 
     $ pip install --user --editable .
 
+.. _releases: https://github.com/telota/quick-csr/releases
+.. _shiv: https://github.com/linkedin/shiv

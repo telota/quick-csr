@@ -133,12 +133,9 @@ Now, with another profile for another OU (``laboratory``):
 
     quick-csr -c :laboratory living-concrete.cubs.org.il
 
-
+.. _INSTALL.rst: /INSTALL.rst
 .. _doskey: https://docs.microsoft.com/en-us/windows/console/console-aliases
 .. _CSR: https://en.wikipedia.org/wiki/Certificate_Signing_Request
 .. _issue: https://github.com/telota/quick-csr/issues
 .. _pipsi: https://pypi.python.org/pypi/pipsi
 .. _`PKCS #10`: https://tools.ietf.org/html/rfc2986
-.. _releases: https://github.com/telota/quick-csr/releases
-.. _shiv: https://github.com/linkedin/shiv
-.. _INSTALL.rst: /INSTALL.rst
