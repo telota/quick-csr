@@ -132,7 +132,8 @@ Now, with another profile for another OU (``laboratory``):
 .. code-block:: console
 
     quick-csr -c :laboratory living-concrete.cubs.org.il
-
+    
+.. _releases: https://github.com/telota/quick-csr/releases
 .. _INSTALL.rst: /INSTALL.rst
 .. _doskey: https://docs.microsoft.com/en-us/windows/console/console-aliases
 .. _CSR: https://en.wikipedia.org/wiki/Certificate_Signing_Request
