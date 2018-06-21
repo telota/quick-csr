@@ -60,7 +60,7 @@ With Python 3.5+ installed, ``quick-csr`` can be run on any system by executing
 an appropriate Python ZIP Application that includes all its dependencies and
 system specific binaries.
 See the Releases_ page to find ready-to-launch zip applications. If your OS is
-not (yet) supported, please head over to the next section or open an issue_ to
+not (yet) supported, please head over to INSTALL.rst_ or open an issue_ to
 request one.
 
 Usage is as described below but with the system specific *filename* instead of
@@ -92,40 +92,6 @@ Regardless of your current working directory you can now run:
 .. code-block:: console
 
     $ quick-csr www.cubs.org.il
-
-Building a Python ZIP Application
----------------------------------
-
-To create a self-contained package including dependencies and binaries for you
-system, install shiv_.
-
-Download the source tarball from the Releases_ page, extract its contents,
-change into its root directory and run:
-
-.. code-block:: console
-
-    $ shiv -o quick-csr-<OS identifier>.pyz -c quick-csr .
-
-Installation as Python package
-------------------------------
-
-Beside obtaining ``quick-csr`` as ZIP Application, it can be installed the
-'classic' way.
-This is not recommended for users that are unexperienced with Python packaging
-and don't want to poke into its historical legacy.
-There's currently no package published on the Python Package Index, therefore
-you have to obtain the source code, change into its root directory and run:
-
-.. code-block:: console
-
-    $ pip install --user .
-
-Finally, to install a hackable instance of the software (assuming you created
-a virtual environment):
-
-.. code-block:: console
-
-    $ pip install --user --editable .
 
 
 What it does
@@ -175,3 +141,4 @@ Now, with another profile for another OU (``laboratory``):
 .. _`PKCS #10`: https://tools.ietf.org/html/rfc2986
 .. _releases: https://github.com/telota/quick-csr/releases
 .. _shiv: https://github.com/linkedin/shiv
+.. _INSTALL.rst: /INSTALL.rst
