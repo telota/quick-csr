@@ -8,6 +8,7 @@ if sys.version_info < (3, 5):
 
 setup(
     name="quick_csr",
+    version="0.2",
     author="Frank Sachsenheim",
     author_email="funkyfuture@riseup.net",
     packages=find_packages(exclude=["tests"]),
@@ -16,7 +17,7 @@ setup(
         "console_scripts": ("quick-csr = quick_csr.cli:main",),
     },
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Environment :: Console',
         'Environment :: MacOS X',
         'Intended Audience :: End Users/Desktop',
