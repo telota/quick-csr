@@ -9,7 +9,9 @@ change into its root directory and run:
 
 .. code-block:: console
 
-    $ shiv -o quick-csr-<OS identifier>-<CPU architecture>.pyz -c quick-csr .
+    $ shiv -o quick-csr-<OS identifier>-<CPU architecture>-<Version>.pyz -c quick-csr .
+
+All identifiers must be noted in lower case.
 
 Installation as Python package
 ------------------------------

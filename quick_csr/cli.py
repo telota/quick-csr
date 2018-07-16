@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 def parse_args(argv: List[str] = sys.argv[1:]) -> Namespace:
     parser = ArgumentParser(
         'Generates certificate signing requests (PKCS #10/PEM) with subject '
-        'information that are defined in a configuration file.',
+        'information that are defined in a configuration file.\n',
         epilog='Due to a bug in the optparse module, the meta variable for '
                'the --config option cannot yet be rendered as '
                '[PATH[:PROFILE]] above. Meaning, the declaration of a profile '
