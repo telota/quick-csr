@@ -70,8 +70,8 @@ Usage is as described below but with the system specific *filename* instead of
 
     $ quick-csr-win10.pyz www.cubs.org.il
 
-Note that the current working directory has to be in the directory in this
-case.
+Note that the application archive has to be in the current working directory
+in this case.
 
 Therefore it is suggested to setup an alias for a day-to-day usage.
 
@@ -81,7 +81,7 @@ On POSIX compliant systems in an appropriate file, e.g. ``~/.bash_aliases``:
 
     alias quick-csr='~/…/quick-csr-linux-amd64.pyz'
 
-On windows, use the doskey_ command to setup an alias:
+On Windows, use the doskey_ command to setup an alias:
 
 .. code-block:: console
 
@@ -132,7 +132,7 @@ Now, with another profile for another OU (``laboratory``):
 .. code-block:: console
 
     quick-csr -c :laboratory living-concrete.cubs.org.il
-    
+
 .. _releases: https://github.com/telota/quick-csr/releases
 .. _INSTALL.rst: /INSTALL.rst
 .. _doskey: https://docs.microsoft.com/en-us/windows/console/console-aliases

@@ -10,7 +10,7 @@ setup(
     name="quick_csr",
     author="Frank Sachsenheim",
     author_email="funkyfuture@riseup.net",
-    packages=find_packages("quick_csr"),
+    packages=find_packages(exclude=["tests"]),
     install_requires=['pyopenssl'],
     entry_points={
         "console_scripts": ("quick-csr = quick_csr.cli:main",),
